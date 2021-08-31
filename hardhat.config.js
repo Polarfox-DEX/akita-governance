@@ -23,15 +23,84 @@ const mnemonic = fs.existsSync('./.mnemonic')
 /**
  * @type import('hardhat/config').HardhatUserConfig
  */
-module.exports = {
-  solidity: "0.5.16",
+ module.exports = {
+  solidity: {
+      compilers: [
+          {
+              version: '0.5.16'
+          },
+          {
+              version: '0.6.4'
+          },
+          {
+              version: '0.6.6',
+              settings: {
+                  optimizer: {
+                      enabled: true,
+                      runs: 1000
+                  }
+              }
+          },
+          {
+              version: '0.6.11'
+          },
+          {
+              version: '0.6.12'
+          },
+          {
+              version: '0.7.4'
+          },
+          {
+              version: '0.7.6',
+              settings: {
+                  optimizer: {
+                      enabled: true,
+                      runs: 1000
+                  }
+              }
+          },
+          {
+              version: '0.8.0',
+              settings: {
+                  optimizer: {
+                      enabled: true,
+                      runs: 1000
+                  }
+              }
+          },
+          {
+              version: '0.8.7',
+              settings: {
+                  optimizer: {
+                      enabled: true,
+                      runs: 1000
+                  }
+              }
+          }
+      ],
+      overrides: {
+          'contracts/Airdrop.sol': {
+              version: '0.8.0',
+              settings: {}
+          }
+      }
+  },
   networks: {
-    fuji: {
-      url: 'https://api.avax-test.network/ext/bc/C/rpc',
-      chainId: 43113,
-      accounts: {
-        mnemonic
+      fuji: {
+          url: 'https://api.avax-test.network/ext/bc/C/rpc',
+          // gasPrice: 225000000000,
+          chainId: 43113,
+          accounts: {
+              mnemonic
+          }
+      }
+  },
+  namedAccounts: {
+      deployer: {
+          fuji: '0x3b69b2ADCbF43DbaBdF6A14634045b5035Db188C'
       },
-    },
+      devTeam: {
+          fuji: '0x7198c0F3b129e4220E5bFfc5579Aab07016a02CE'
+      }
   }
-};
+}
